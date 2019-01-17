@@ -4,17 +4,16 @@ package cassini;
 
 import "google/api/annotations.proto";
 
-service CassiniController {
-  rpc Ping(PingRequest) returns (PingReply) {
-    option (google.api.http) = {
-      get: "/v1/ping"
-    };
-  }
-  rpc Get(GetRequest) returns (GetReply) {
-    option (google.api.http) = {
-      get: "/v1/get/{key}"
-    };
-  }
+message CacheLocation {
+  string dc = 1;
+  string rack = 2;
+  string url = 3;
+}
+
+message Object {
+  string key = 1;
+  string origin = 2;
+  repeated CacheLocation locations = 3;
 }
 
 message PingRequest {}
@@ -28,6 +27,20 @@ message GetRequest {
 }
 
 message GetReply {
-  string key = 1;
-  string url = 2;
+  Object object = 1;
 }
+
+service Cassini {
+  rpc Ping(PingRequest) returns (PingReply) {
+    option (google.api.http) = {
+      get: "/v1/ping"
+    };
+  }
+
+  rpc Get(GetRequest) returns (GetReply) {
+    option (google.api.http) = {
+      get: "/v1/get/{key}"
+    };
+  }
+}
+

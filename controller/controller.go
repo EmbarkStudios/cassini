@@ -73,7 +73,7 @@ func (c *Controller) Serve() error {
 			return
 		}
 		gs := grpc.NewServer()
-		api.RegisterCassiniControllerServer(gs, c)
+		api.RegisterCassiniServer(gs, c)
 		reflection.Register(gs)
 		err = gs.Serve(listen)
 		if err != nil {

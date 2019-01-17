@@ -28,7 +28,7 @@ var _ status.Status
 var _ = runtime.String
 var _ = utilities.NewDoubleArray
 
-func request_CassiniController_Ping_0(ctx context.Context, marshaler runtime.Marshaler, client CassiniControllerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Cassini_Ping_0(ctx context.Context, marshaler runtime.Marshaler, client CassiniClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq PingRequest
 	var metadata runtime.ServerMetadata
 
@@ -37,7 +37,7 @@ func request_CassiniController_Ping_0(ctx context.Context, marshaler runtime.Mar
 
 }
 
-func request_CassiniController_Get_0(ctx context.Context, marshaler runtime.Marshaler, client CassiniControllerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Cassini_Get_0(ctx context.Context, marshaler runtime.Marshaler, client CassiniClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetRequest
 	var metadata runtime.ServerMetadata
 
@@ -64,9 +64,9 @@ func request_CassiniController_Get_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-// RegisterCassiniControllerHandlerFromEndpoint is same as RegisterCassiniControllerHandler but
+// RegisterCassiniHandlerFromEndpoint is same as RegisterCassiniHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterCassiniControllerHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterCassiniHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -86,23 +86,23 @@ func RegisterCassiniControllerHandlerFromEndpoint(ctx context.Context, mux *runt
 		}()
 	}()
 
-	return RegisterCassiniControllerHandler(ctx, mux, conn)
+	return RegisterCassiniHandler(ctx, mux, conn)
 }
 
-// RegisterCassiniControllerHandler registers the http handlers for service CassiniController to "mux".
+// RegisterCassiniHandler registers the http handlers for service Cassini to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterCassiniControllerHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterCassiniControllerHandlerClient(ctx, mux, NewCassiniControllerClient(conn))
+func RegisterCassiniHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterCassiniHandlerClient(ctx, mux, NewCassiniClient(conn))
 }
 
-// RegisterCassiniControllerHandlerClient registers the http handlers for service CassiniController
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "CassiniControllerClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "CassiniControllerClient"
+// RegisterCassiniHandlerClient registers the http handlers for service Cassini
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "CassiniClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "CassiniClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "CassiniControllerClient" to call the correct interceptors.
-func RegisterCassiniControllerHandlerClient(ctx context.Context, mux *runtime.ServeMux, client CassiniControllerClient) error {
+// "CassiniClient" to call the correct interceptors.
+func RegisterCassiniHandlerClient(ctx context.Context, mux *runtime.ServeMux, client CassiniClient) error {
 
-	mux.Handle("GET", pattern_CassiniController_Ping_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Cassini_Ping_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		if cn, ok := w.(http.CloseNotifier); ok {
@@ -120,18 +120,18 @@ func RegisterCassiniControllerHandlerClient(ctx context.Context, mux *runtime.Se
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_CassiniController_Ping_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cassini_Ping_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_CassiniController_Ping_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cassini_Ping_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_CassiniController_Get_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Cassini_Get_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		if cn, ok := w.(http.CloseNotifier); ok {
@@ -149,14 +149,14 @@ func RegisterCassiniControllerHandlerClient(ctx context.Context, mux *runtime.Se
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_CassiniController_Get_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cassini_Get_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_CassiniController_Get_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cassini_Get_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -164,13 +164,13 @@ func RegisterCassiniControllerHandlerClient(ctx context.Context, mux *runtime.Se
 }
 
 var (
-	pattern_CassiniController_Ping_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "ping"}, ""))
+	pattern_Cassini_Ping_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "ping"}, ""))
 
-	pattern_CassiniController_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "get", "key"}, ""))
+	pattern_Cassini_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "get", "key"}, ""))
 )
 
 var (
-	forward_CassiniController_Ping_0 = runtime.ForwardResponseMessage
+	forward_Cassini_Ping_0 = runtime.ForwardResponseMessage
 
-	forward_CassiniController_Get_0 = runtime.ForwardResponseMessage
+	forward_Cassini_Get_0 = runtime.ForwardResponseMessage
 )

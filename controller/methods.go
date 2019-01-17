@@ -5,6 +5,8 @@ import (
 
 	pb "github.com/embarkstudios/cassini/api"
 	log "github.com/sirupsen/logrus"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func (c *Controller) Ping(ctx context.Context, req *pb.PingRequest) (*pb.PingReply, error) {
@@ -16,10 +18,6 @@ func (c *Controller) Ping(ctx context.Context, req *pb.PingRequest) (*pb.PingRep
 }
 
 func (c *Controller) Get(ctx context.Context, req *pb.GetRequest) (*pb.GetReply, error) {
-	log.WithField("context", ctx).Debug("Get called")
-	reply := &pb.GetReply{
-		Key: req.Key,
-		Url: "https://somewhere/over/the/rainbow",
-	}
-	return reply, nil
+	log.WithField("key", req.Key).Debug("Get called")
+	return nil, status.Error(codes.NotFound, "Key not found")
 }
