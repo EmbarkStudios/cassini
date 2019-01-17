@@ -24,20 +24,65 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-type CacheLocation struct {
+type CacheNode struct {
 	Dc                   string   `protobuf:"bytes,1,opt,name=dc,proto3" json:"dc,omitempty"`
 	Rack                 string   `protobuf:"bytes,2,opt,name=rack,proto3" json:"rack,omitempty"`
-	Url                  string   `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CacheNode) Reset()         { *m = CacheNode{} }
+func (m *CacheNode) String() string { return proto.CompactTextString(m) }
+func (*CacheNode) ProtoMessage()    {}
+func (*CacheNode) Descriptor() ([]byte, []int) {
+	return fileDescriptor_cassini_8410d81afdc45aab, []int{0}
+}
+func (m *CacheNode) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CacheNode.Unmarshal(m, b)
+}
+func (m *CacheNode) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CacheNode.Marshal(b, m, deterministic)
+}
+func (dst *CacheNode) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CacheNode.Merge(dst, src)
+}
+func (m *CacheNode) XXX_Size() int {
+	return xxx_messageInfo_CacheNode.Size(m)
+}
+func (m *CacheNode) XXX_DiscardUnknown() {
+	xxx_messageInfo_CacheNode.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CacheNode proto.InternalMessageInfo
+
+func (m *CacheNode) GetDc() string {
+	if m != nil {
+		return m.Dc
+	}
+	return ""
+}
+
+func (m *CacheNode) GetRack() string {
+	if m != nil {
+		return m.Rack
+	}
+	return ""
+}
+
+type CacheLocation struct {
+	Node                 *CacheNode `protobuf:"bytes,1,opt,name=node,proto3" json:"node,omitempty"`
+	Url                  string     `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *CacheLocation) Reset()         { *m = CacheLocation{} }
 func (m *CacheLocation) String() string { return proto.CompactTextString(m) }
 func (*CacheLocation) ProtoMessage()    {}
 func (*CacheLocation) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cassini_a523d572c3e12b8d, []int{0}
+	return fileDescriptor_cassini_8410d81afdc45aab, []int{1}
 }
 func (m *CacheLocation) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CacheLocation.Unmarshal(m, b)
@@ -57,18 +102,11 @@ func (m *CacheLocation) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_CacheLocation proto.InternalMessageInfo
 
-func (m *CacheLocation) GetDc() string {
+func (m *CacheLocation) GetNode() *CacheNode {
 	if m != nil {
-		return m.Dc
+		return m.Node
 	}
-	return ""
-}
-
-func (m *CacheLocation) GetRack() string {
-	if m != nil {
-		return m.Rack
-	}
-	return ""
+	return nil
 }
 
 func (m *CacheLocation) GetUrl() string {
@@ -91,7 +129,7 @@ func (m *Object) Reset()         { *m = Object{} }
 func (m *Object) String() string { return proto.CompactTextString(m) }
 func (*Object) ProtoMessage()    {}
 func (*Object) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cassini_a523d572c3e12b8d, []int{1}
+	return fileDescriptor_cassini_8410d81afdc45aab, []int{2}
 }
 func (m *Object) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Object.Unmarshal(m, b)
@@ -142,7 +180,7 @@ func (m *PingRequest) Reset()         { *m = PingRequest{} }
 func (m *PingRequest) String() string { return proto.CompactTextString(m) }
 func (*PingRequest) ProtoMessage()    {}
 func (*PingRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cassini_a523d572c3e12b8d, []int{2}
+	return fileDescriptor_cassini_8410d81afdc45aab, []int{3}
 }
 func (m *PingRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PingRequest.Unmarshal(m, b)
@@ -173,7 +211,7 @@ func (m *PingReply) Reset()         { *m = PingReply{} }
 func (m *PingReply) String() string { return proto.CompactTextString(m) }
 func (*PingReply) ProtoMessage()    {}
 func (*PingReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cassini_a523d572c3e12b8d, []int{3}
+	return fileDescriptor_cassini_8410d81afdc45aab, []int{4}
 }
 func (m *PingReply) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PingReply.Unmarshal(m, b)
@@ -211,7 +249,7 @@ func (m *GetRequest) Reset()         { *m = GetRequest{} }
 func (m *GetRequest) String() string { return proto.CompactTextString(m) }
 func (*GetRequest) ProtoMessage()    {}
 func (*GetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cassini_a523d572c3e12b8d, []int{4}
+	return fileDescriptor_cassini_8410d81afdc45aab, []int{5}
 }
 func (m *GetRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetRequest.Unmarshal(m, b)
@@ -249,7 +287,7 @@ func (m *GetReply) Reset()         { *m = GetReply{} }
 func (m *GetReply) String() string { return proto.CompactTextString(m) }
 func (*GetReply) ProtoMessage()    {}
 func (*GetReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cassini_a523d572c3e12b8d, []int{5}
+	return fileDescriptor_cassini_8410d81afdc45aab, []int{6}
 }
 func (m *GetReply) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetReply.Unmarshal(m, b)
@@ -276,13 +314,100 @@ func (m *GetReply) GetObject() *Object {
 	return nil
 }
 
+type AnnounceRequest struct {
+	Node                 *CacheNode `protobuf:"bytes,1,opt,name=node,proto3" json:"node,omitempty"`
+	Keys                 []string   `protobuf:"bytes,2,rep,name=keys,proto3" json:"keys,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *AnnounceRequest) Reset()         { *m = AnnounceRequest{} }
+func (m *AnnounceRequest) String() string { return proto.CompactTextString(m) }
+func (*AnnounceRequest) ProtoMessage()    {}
+func (*AnnounceRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_cassini_8410d81afdc45aab, []int{7}
+}
+func (m *AnnounceRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AnnounceRequest.Unmarshal(m, b)
+}
+func (m *AnnounceRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AnnounceRequest.Marshal(b, m, deterministic)
+}
+func (dst *AnnounceRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AnnounceRequest.Merge(dst, src)
+}
+func (m *AnnounceRequest) XXX_Size() int {
+	return xxx_messageInfo_AnnounceRequest.Size(m)
+}
+func (m *AnnounceRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AnnounceRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AnnounceRequest proto.InternalMessageInfo
+
+func (m *AnnounceRequest) GetNode() *CacheNode {
+	if m != nil {
+		return m.Node
+	}
+	return nil
+}
+
+func (m *AnnounceRequest) GetKeys() []string {
+	if m != nil {
+		return m.Keys
+	}
+	return nil
+}
+
+type AnnounceReply struct {
+	ExpireTimeSeconds    int32    `protobuf:"varint,1,opt,name=expireTimeSeconds,proto3" json:"expireTimeSeconds,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AnnounceReply) Reset()         { *m = AnnounceReply{} }
+func (m *AnnounceReply) String() string { return proto.CompactTextString(m) }
+func (*AnnounceReply) ProtoMessage()    {}
+func (*AnnounceReply) Descriptor() ([]byte, []int) {
+	return fileDescriptor_cassini_8410d81afdc45aab, []int{8}
+}
+func (m *AnnounceReply) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AnnounceReply.Unmarshal(m, b)
+}
+func (m *AnnounceReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AnnounceReply.Marshal(b, m, deterministic)
+}
+func (dst *AnnounceReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AnnounceReply.Merge(dst, src)
+}
+func (m *AnnounceReply) XXX_Size() int {
+	return xxx_messageInfo_AnnounceReply.Size(m)
+}
+func (m *AnnounceReply) XXX_DiscardUnknown() {
+	xxx_messageInfo_AnnounceReply.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AnnounceReply proto.InternalMessageInfo
+
+func (m *AnnounceReply) GetExpireTimeSeconds() int32 {
+	if m != nil {
+		return m.ExpireTimeSeconds
+	}
+	return 0
+}
+
 func init() {
+	proto.RegisterType((*CacheNode)(nil), "cassini.CacheNode")
 	proto.RegisterType((*CacheLocation)(nil), "cassini.CacheLocation")
 	proto.RegisterType((*Object)(nil), "cassini.Object")
 	proto.RegisterType((*PingRequest)(nil), "cassini.PingRequest")
 	proto.RegisterType((*PingReply)(nil), "cassini.PingReply")
 	proto.RegisterType((*GetRequest)(nil), "cassini.GetRequest")
 	proto.RegisterType((*GetReply)(nil), "cassini.GetReply")
+	proto.RegisterType((*AnnounceRequest)(nil), "cassini.AnnounceRequest")
+	proto.RegisterType((*AnnounceReply)(nil), "cassini.AnnounceReply")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -299,6 +424,7 @@ const _ = grpc.SupportPackageIsVersion4
 type CassiniClient interface {
 	Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingReply, error)
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetReply, error)
+	Announce(ctx context.Context, in *AnnounceRequest, opts ...grpc.CallOption) (*AnnounceReply, error)
 }
 
 type cassiniClient struct {
@@ -327,10 +453,20 @@ func (c *cassiniClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.Ca
 	return out, nil
 }
 
+func (c *cassiniClient) Announce(ctx context.Context, in *AnnounceRequest, opts ...grpc.CallOption) (*AnnounceReply, error) {
+	out := new(AnnounceReply)
+	err := c.cc.Invoke(ctx, "/cassini.Cassini/Announce", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CassiniServer is the server API for Cassini service.
 type CassiniServer interface {
 	Ping(context.Context, *PingRequest) (*PingReply, error)
 	Get(context.Context, *GetRequest) (*GetReply, error)
+	Announce(context.Context, *AnnounceRequest) (*AnnounceReply, error)
 }
 
 func RegisterCassiniServer(s *grpc.Server, srv CassiniServer) {
@@ -373,6 +509,24 @@ func _Cassini_Get_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cassini_Announce_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AnnounceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CassiniServer).Announce(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cassini.Cassini/Announce",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CassiniServer).Announce(ctx, req.(*AnnounceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Cassini_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "cassini.Cassini",
 	HandlerType: (*CassiniServer)(nil),
@@ -385,34 +539,44 @@ var _Cassini_serviceDesc = grpc.ServiceDesc{
 			MethodName: "Get",
 			Handler:    _Cassini_Get_Handler,
 		},
+		{
+			MethodName: "Announce",
+			Handler:    _Cassini_Announce_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "cassini.proto",
 }
 
-func init() { proto.RegisterFile("cassini.proto", fileDescriptor_cassini_a523d572c3e12b8d) }
+func init() { proto.RegisterFile("cassini.proto", fileDescriptor_cassini_8410d81afdc45aab) }
 
-var fileDescriptor_cassini_a523d572c3e12b8d = []byte{
-	// 328 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x51, 0xdd, 0x4e, 0xc2, 0x30,
-	0x14, 0x0e, 0x1b, 0x19, 0x70, 0xc8, 0x04, 0x8f, 0x4a, 0x16, 0x62, 0x0c, 0x69, 0x62, 0xe4, 0x8a,
-	0x45, 0xf0, 0x09, 0x44, 0xc3, 0x8d, 0x89, 0x66, 0x6f, 0x30, 0x4a, 0x33, 0x2a, 0x4b, 0x3b, 0xb7,
-	0x42, 0xb2, 0x18, 0x6f, 0x7c, 0x05, 0x1e, 0xcd, 0x57, 0xf0, 0x41, 0x4c, 0xbb, 0x02, 0xa2, 0x77,
-	0xe7, 0xfb, 0xe9, 0x77, 0xbe, 0x93, 0x82, 0x4f, 0xe3, 0xa2, 0xe0, 0x82, 0x8f, 0xb2, 0x5c, 0x2a,
-	0x89, 0x0d, 0x0b, 0xfb, 0x97, 0x89, 0x94, 0x49, 0xca, 0xc2, 0x38, 0xe3, 0x61, 0x2c, 0x84, 0x54,
-	0xb1, 0xe2, 0x52, 0x14, 0x95, 0x8d, 0x3c, 0x82, 0x3f, 0x8d, 0xe9, 0x92, 0x3d, 0x49, 0x6a, 0x78,
-	0x3c, 0x01, 0x67, 0x41, 0x83, 0xda, 0xa0, 0x36, 0x6c, 0x45, 0xce, 0x82, 0x22, 0x42, 0x3d, 0x8f,
-	0xe9, 0x2a, 0x70, 0x0c, 0x63, 0x66, 0xec, 0x82, 0xbb, 0xce, 0xd3, 0xc0, 0x35, 0x94, 0x1e, 0xc9,
-	0x12, 0xbc, 0xe7, 0xf9, 0x2b, 0xa3, 0x4a, 0x6b, 0x2b, 0x56, 0xda, 0x00, 0x3d, 0x62, 0x0f, 0x3c,
-	0x99, 0xf3, 0x84, 0x0b, 0x9b, 0x61, 0x11, 0xde, 0x41, 0x2b, 0xb5, 0x5b, 0x8b, 0xc0, 0x1d, 0xb8,
-	0xc3, 0xf6, 0xb8, 0x37, 0xda, 0x1d, 0x71, 0x54, 0x2a, 0x3a, 0x18, 0x89, 0x0f, 0xed, 0x17, 0x2e,
-	0x92, 0x88, 0xbd, 0xad, 0x59, 0xa1, 0xc8, 0x35, 0xb4, 0x2a, 0x98, 0xa5, 0x25, 0x06, 0xd0, 0xd8,
-	0xb0, 0xbc, 0xe0, 0x52, 0xd8, 0xfd, 0x3b, 0x48, 0xae, 0x00, 0x66, 0x4c, 0xd9, 0x47, 0xff, 0x3b,
-	0x92, 0x09, 0x34, 0x8d, 0xae, 0x53, 0x6e, 0xc0, 0x93, 0xe6, 0x16, 0x63, 0x68, 0x8f, 0x3b, 0xfb,
-	0x52, 0xd5, 0x89, 0x91, 0x95, 0xc7, 0xdb, 0x1a, 0x34, 0xa6, 0x95, 0x84, 0xf7, 0x50, 0xd7, 0x3d,
-	0xf0, 0x7c, 0x6f, 0xfe, 0xd5, 0xb2, 0x8f, 0x7f, 0xd8, 0x2c, 0x2d, 0x49, 0xf7, 0xf3, 0xeb, 0x7b,
-	0xeb, 0x00, 0x36, 0xc3, 0xcd, 0x6d, 0x98, 0xe9, 0xb7, 0x0f, 0xe0, 0xce, 0x98, 0xc2, 0xb3, 0xbd,
-	0xf9, 0x50, 0xb9, 0x7f, 0x7a, 0x4c, 0xea, 0x80, 0x0b, 0x13, 0xd0, 0x41, 0x5f, 0x07, 0x24, 0x4c,
-	0x85, 0xef, 0x2b, 0x56, 0x7e, 0xcc, 0x3d, 0xf3, 0xb1, 0x93, 0x9f, 0x00, 0x00, 0x00, 0xff, 0xff,
-	0x76, 0xa1, 0x44, 0x9c, 0x10, 0x02, 0x00, 0x00,
+var fileDescriptor_cassini_8410d81afdc45aab = []byte{
+	// 430 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0xdb, 0x6e, 0xd3, 0x40,
+	0x10, 0x25, 0x76, 0xc8, 0x65, 0x22, 0x93, 0x76, 0x80, 0xc8, 0x8a, 0x10, 0x8a, 0x56, 0x02, 0xfa,
+	0x80, 0x6a, 0x91, 0xf2, 0x0a, 0x12, 0x14, 0xa9, 0x42, 0xe2, 0x26, 0xc3, 0x0f, 0xb8, 0xeb, 0x91,
+	0xbb, 0xc4, 0xec, 0x1a, 0xef, 0xa6, 0xc2, 0x42, 0xbc, 0xf0, 0x0b, 0x7c, 0x5a, 0x7f, 0x81, 0x0f,
+	0x41, 0xbb, 0x5e, 0x3b, 0xb4, 0xe5, 0x81, 0xb7, 0x99, 0x3d, 0x73, 0xce, 0x9c, 0x39, 0x36, 0x44,
+	0x3c, 0xd3, 0x5a, 0x48, 0x71, 0x58, 0xd5, 0xca, 0x28, 0x1c, 0xfb, 0x76, 0x79, 0xaf, 0x50, 0xaa,
+	0x28, 0x29, 0xc9, 0x2a, 0x91, 0x64, 0x52, 0x2a, 0x93, 0x19, 0xa1, 0xa4, 0x6e, 0xc7, 0x58, 0x02,
+	0xd3, 0xe3, 0x8c, 0x9f, 0xd1, 0x3b, 0x95, 0x13, 0xde, 0x82, 0x20, 0xe7, 0xf1, 0x60, 0x35, 0x38,
+	0x98, 0xa6, 0x41, 0xce, 0x11, 0x61, 0x58, 0x67, 0x7c, 0x13, 0x07, 0xee, 0xc5, 0xd5, 0xec, 0x35,
+	0x44, 0x8e, 0xf0, 0x46, 0x71, 0x27, 0x84, 0x0f, 0x61, 0x28, 0x55, 0x4e, 0x8e, 0x36, 0x5b, 0xe3,
+	0x61, 0x67, 0xa3, 0x97, 0x4d, 0x1d, 0x8e, 0x7b, 0x10, 0x6e, 0xeb, 0xd2, 0x6b, 0xd9, 0x92, 0x9d,
+	0xc1, 0xe8, 0xfd, 0xe9, 0x67, 0xe2, 0xc6, 0x62, 0x1b, 0x6a, 0xfc, 0x66, 0x5b, 0xe2, 0x02, 0x46,
+	0xaa, 0x16, 0x85, 0x90, 0x9e, 0xe0, 0x3b, 0x7c, 0x0a, 0xd3, 0xd2, 0x6f, 0xd6, 0x71, 0xb8, 0x0a,
+	0x0f, 0x66, 0xeb, 0xc5, 0xe5, 0x95, 0x9d, 0xb1, 0x74, 0x37, 0xc8, 0x22, 0x98, 0x7d, 0x10, 0xb2,
+	0x48, 0xe9, 0xeb, 0x96, 0xb4, 0x61, 0x0f, 0x60, 0xda, 0xb6, 0x55, 0xd9, 0x60, 0x0c, 0xe3, 0x73,
+	0xaa, 0xb5, 0x50, 0xd2, 0xef, 0xef, 0x5a, 0x76, 0x1f, 0xe0, 0x84, 0x8c, 0x27, 0x5d, 0xf7, 0xc8,
+	0x8e, 0x60, 0xe2, 0x70, 0xab, 0xf2, 0x08, 0x46, 0xca, 0xdd, 0xe2, 0x73, 0x98, 0xf7, 0xa6, 0xda,
+	0x13, 0x53, 0x0f, 0xb3, 0xb7, 0x30, 0x7f, 0x21, 0xa5, 0xda, 0x4a, 0x4e, 0x9d, 0xf2, 0xff, 0x26,
+	0x88, 0x30, 0xdc, 0x50, 0xa3, 0xe3, 0x60, 0x15, 0xda, 0xcf, 0x61, 0x6b, 0xf6, 0x0c, 0xa2, 0x9d,
+	0x9c, 0x35, 0xf2, 0x18, 0xf6, 0xe9, 0x5b, 0x25, 0x6a, 0xfa, 0x24, 0xbe, 0xd0, 0x47, 0xe2, 0x4a,
+	0xe6, 0xda, 0x29, 0xdf, 0x4c, 0xaf, 0x03, 0xeb, 0x8b, 0x01, 0x8c, 0x8f, 0xdb, 0x75, 0xf8, 0x12,
+	0x86, 0x36, 0x15, 0xbc, 0xd3, 0x1b, 0xf8, 0x2b, 0xb3, 0x25, 0x5e, 0x79, 0xad, 0xca, 0x86, 0xed,
+	0xfd, 0xbc, 0xf8, 0xfd, 0x2b, 0x00, 0x9c, 0x24, 0xe7, 0x4f, 0x92, 0xca, 0x72, 0x5f, 0x41, 0x78,
+	0x42, 0x06, 0x6f, 0xf7, 0xc3, 0xbb, 0x00, 0x97, 0xfb, 0x97, 0x1f, 0xad, 0xc0, 0x5d, 0x27, 0x30,
+	0xc7, 0xc8, 0x0a, 0x14, 0x64, 0x92, 0xef, 0x1b, 0x6a, 0x7e, 0xe0, 0x73, 0x98, 0x74, 0x47, 0x61,
+	0xdc, 0xb3, 0xae, 0xc4, 0xb6, 0x5c, 0xfc, 0x03, 0xb1, 0xa2, 0x37, 0x4e, 0x47, 0xee, 0xdf, 0x3e,
+	0xfa, 0x13, 0x00, 0x00, 0xff, 0xff, 0x7d, 0x9e, 0xa9, 0xa4, 0x13, 0x03, 0x00, 0x00,
 }

@@ -21,3 +21,11 @@ func (c *Controller) Get(ctx context.Context, req *pb.GetRequest) (*pb.GetReply,
 	log.WithField("key", req.Key).Debug("Get called")
 	return nil, status.Error(codes.NotFound, "Key not found")
 }
+
+func (c *Controller) Announce(ctx context.Context, req *pb.AnnounceRequest) (*pb.AnnounceReply, error) {
+	log.WithField("node", req.Node).Debug("Announce called")
+	reply := &pb.AnnounceReply{
+		ExpireTimeSeconds: 60,
+	}
+	return reply, nil
+}
