@@ -10,7 +10,7 @@ service CassiniController {
       get: "/v1/ping"
     };
   }
-  rpc Get(GetRequest) returns (GetResponse) {
+  rpc Get(GetRequest) returns (GetReply) {
     option (google.api.http) = {
       get: "/v1/get/{key}"
     };
@@ -27,7 +27,7 @@ message GetRequest {
     string key = 1;
 }
 
-message GetResponse {
+message GetReply {
   string key = 1;
   string url = 2;
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"strings"
 
+	"github.com/embarkstudios/cassini/controller"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
@@ -37,7 +38,7 @@ func main() {
 	kingpin.Parse()
 
 	switch kingpin.Parse() {
-	// case controller.FullCommand():
-	// 	controller.RunServer()
+	case controller.FullCommand():
+		controller.RunController()
 	}
 }
