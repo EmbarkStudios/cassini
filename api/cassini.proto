@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package cassini;
+
+import "google/api/annotations.proto";
+
+service CassiniController {
+  rpc Ping(PingRequest) returns (PingReply) {
+    option (google.api.http) = {
+      get: "/v1/ping"
+    };
+  }
+  rpc Get(GetRequest) returns (GetResponse) {
+    option (google.api.http) = {
+      get: "/v1/get/{key}"
+    };
+  }
+}
+
+message PingRequest {}
+
+message PingReply {
+  string version = 1;
+}
+
+message GetRequest {
+    string key = 1;
+}
+
+message GetResponse {
+  string key = 1;
+  string url = 2;
+}
